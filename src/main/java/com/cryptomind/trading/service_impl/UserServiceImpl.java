@@ -2,7 +2,6 @@ package com.cryptomind.trading.service_impl;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.cryptomind.dao.UserBaseDao;
@@ -31,18 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private UserBaseDao userBaseDao;
 
-
-	@Value("${project.secure.rsaPublicKey}")
-	private String rsaPublicKey;
+	private TokenUtil tokenUtil = new TokenUtil();
 	
-	@Value("${project.secure.rsaPrivateKey}")
-	private String rsaPrivateKey;
-	
-	@Value("${project.secure.aesPrivateKey}")
-	private String aesKey;
-	
-
-	
+	private UserPasswordUtil passwordUtil = new UserPasswordUtil();
 	
 	@Override
 	public UserLoginResponse register(RegisterParam rp)  {
@@ -52,7 +42,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setStatus(0);
 			ulr.setUser(new UserBase());
 			String content = String.format("%d,%d", 0, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			return ulr;
 		}
@@ -75,7 +65,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setMsg("Invitation Code Error");
 			ulr.setUser(new UserBase());
 			String content = String.format("%d,%d", 0, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			return ulr;
 		}
@@ -97,7 +87,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setStatus(0);
 			ulr.setUser(new UserBase());
 			String content = String.format("%d,%d", 0, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			ulr.setMsg("Email Duplicated!");
 			return ulr;
@@ -122,7 +112,7 @@ public class UserServiceImpl implements UserService {
 			Long userId = 0L;
 			if(newUser.getId()>0) {
 				userId = newUser.getId();
-				String encrypt = UserPasswordUtil.encrypt_v2(newUser.getPasswd_str(), newUser.getSalt(), userId, aesKey, rsaPrivateKey);
+				String encrypt = passwordUtil.encrypt_v2(newUser.getPasswd_str(), newUser.getSalt(), userId);
 				if(encrypt!=null) {
 					newUser.setPasswd_str(encrypt);
 					userBaseDao.save(newUser);
@@ -139,7 +129,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setMsg("Success");
 			ulr.setUser(newUser);
 			String content = String.format("%d,%d", userId, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			
 			ulr.setToken(token);
 			return ulr;
@@ -149,7 +139,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setStatus(0);
 			ulr.setUser(new UserBase());
 			String content = String.format("%d,%d", 0, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			return ulr;
 		}
@@ -212,7 +202,7 @@ public class UserServiceImpl implements UserService {
 		UserBase u = userBaseDao.findByEmail(loginParam.getEmail());
 		log.info("findByEmail, email={}, user={}", loginParam.getEmail(), u);
 		
-		String password = UserPasswordUtil.decrypt_v2(u.getPasswd_str(), aesKey, rsaPublicKey);
+		String password = passwordUtil.decrypt_v2(u.getPasswd_str());
 		
 		if(u!=null && u.getId()>0 && password!=null && password.equals(loginParam.getPassword())) {
 			Long userId = u.getId();
@@ -226,7 +216,7 @@ public class UserServiceImpl implements UserService {
 			Integer roleId = u.getFrole_id();//+u.getSrole_id()*10 + u.getTrole_id()*100+100000;
 
 			String content = String.format("%d,%d,%d", userId,roleId,System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			return ulr;
 		}else {
@@ -235,7 +225,7 @@ public class UserServiceImpl implements UserService {
 			ulr.setStatus(0);
 			ulr.setUser(new UserBase());
 			String content = String.format("%d,%d", 0, System.currentTimeMillis());
-			String token = TokenUtil.rasEncryptAndAesSign(content, rsaPrivateKey, aesKey);
+			String token = tokenUtil.rasEncryptAndAesSign(content);
 			ulr.setToken(token);
 			return ulr;
 		}
