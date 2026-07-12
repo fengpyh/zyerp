@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cryptomind.trading.dto.Consts;
-import com.cryptomind.trading.dto.Id_Role;
-import com.cryptomind.trading.web.MutableHttpServletRequest;
 import com.fastfintech.sdk.util.ExceptionUtil;
+import com.fastfintech.sdk.util_auth.Id_Role;
+import com.fastfintech.sdk.util_auth.MutableHttpServletRequest;
 
 import java.util.Map;
 
