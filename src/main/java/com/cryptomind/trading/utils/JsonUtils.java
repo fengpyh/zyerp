@@ -36,7 +36,7 @@ public class JsonUtils {
             }
             return Optional.empty();
         } catch (Exception e) {
-            log.error("ex:{}", ExceptionUtils.getErrorInfoFromException(e));
+            log.error("ex:{}", ExceptionUtil.toString(e));
             return Optional.empty();
         }
     }

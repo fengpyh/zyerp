@@ -20,8 +20,6 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import com.cryptomind.ymatch.OrderConsumerMsgHandler;
-
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
@@ -35,9 +33,7 @@ import java.lang.reflect.Method;
 //@EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
-    @Resource
-    private OrderConsumerMsgHandler orderConsumerMsgHandler;
-    
+
     @Bean
     CacheManager cacheManager(RedisConnectionFactory factory) {
         //初始化一个RedisCacheWriter
