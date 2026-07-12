@@ -40,13 +40,12 @@ public class FrontPage extends BaseApi {
 	private HttpServletRequest request;
 
 	@GetMapping("/")
-    public String index(Model model) {
+    public String index(ModelMap model) {
         model.addAttribute("pageId", "dashboard");
         model.addAttribute("pageTitle", "page.dashboard.title");
         
-        model.addAttribute("LG", true);
-        model.addAttribute("email", "fe**172@g**l.com");
-        return "index";
+        common(model);
+        return "dashboard";
     }
     
     @GetMapping("/dashboard")
