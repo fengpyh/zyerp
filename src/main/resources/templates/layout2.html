@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业全资产综合控制中枢 | Management OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { overflow-x: hidden; background-color: #f8f9fa; }
+        
+        /* 左侧固定侧边栏：放宽至 280px 以容纳高密度 ERP 菜单文本 */
+        .admin-sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
+            background-color: #0f172a; /* 深邃黑蓝基底 */
+            z-index: 1030;
+            overflow-y: auto;
+        }
+        
+        /* 右侧工作主视口 */
+        .admin-main-viewport {
+            margin-left: 280px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-top-navbar {
+            height: 60px;
+            z-index: 1020;
+        }
+
+        /* 侧边栏一级核心菜单项样式 */
+        .sidebar-menu-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            color: #475569;
+            font-weight: 700;
+            padding: 12px 16px 4px 16px;
+        }
+
+        .sidebar-menu-link {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .sidebar-menu-link:hover, .sidebar-menu-link.active {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+        .sidebar-menu-link.active {
+            background-color: #0d6efd !important;
+            font-weight: 600;
+        }
+
+        /* 二级子菜单容器与样式 */
+        .sidebar-submenu {
+            padding-left: 28px;
+        }
+        .submenu-link {
+            color: #64748b;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            transition: all 0.15s;
+        }
+        .submenu-link:hover, .submenu-link.active {
+            color: #ffffff;
+        }
+        .submenu-link.active {
+            color: #3b82f6 !important;
+            font-weight: 600;
+        }
+
+        /* 徽标通知圆点 */
+        .notification-badge-dot {
+            position: absolute;
+            top: 6px; right: 6px;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+        }
+
+        .fs-7 { font-size: 0.85rem; }
+        .fs-8 { font-size: 0.75rem; }
+        .font-mono { font-family: 'Courier New', Courier, monospace; }
+        
+        /* 侧边栏滚动条美化 */
+        .admin-sidebar::-webkit-scrollbar { width: 4px; }
+        .admin-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand" th:text="#{app.name}">Admin Dashboard</div>
+        <nav class="nav flex-column py-3">
+            <a class="nav-link" th:href="@{/}" th:classappend="${pageId == 'dashboard'} ? 'active' : ''"><i class="bi bi-grid-1x2"></i><span th:text="#{nav.dashboard}">Dashboard</span></a>
+            <a class="nav-link" th:href="@{/pvuv}" th:classappend="${pageId == 'pvuv'} ? 'active' : ''"><i class="bi bi-graph-up"></i><span th:text="#{nav.pvuv}">PV/UV</span></a>
+            <a class="nav-link" th:href="@{/admin/users}" th:classappend="${pageId == 'users'} ? 'active' : ''"><i class="bi bi-people"></i><span th:text="#{nav.users}">Users</span></a>
+            <a class="nav-link" th:href="@{/admin/topics}" th:classappend="${pageId == 'topics'} ? 'active' : ''"><i class="bi bi-chat-square-text"></i><span th:text="#{nav.topics}">Topics</span></a>
+            <a class="nav-link" th:href="@{/admin/posts}" th:classappend="${pageId == 'posts'} ? 'active' : ''"><i class="bi bi-file-text"></i><span th:text="#{nav.posts}">Posts</span></a>
+            <a class="nav-link" th:href="@{/admin/replies}" th:classappend="${pageId == 'replies'} ? 'active' : ''"><i class="bi bi-reply"></i><span th:text="#{nav.replies}">Replies</span></a>
+            <a class="nav-link" th:href="@{/admin/news}" th:classappend="${pageId == 'news'} ? 'active' : ''"><i class="bi bi-newspaper"></i><span th:text="#{nav.news}">News</span></a>
+            <div class="nav-group-label" th:text="#{nav.group.components}">Components</div>
+            <a class="nav-link" th:href="@{/admin/components}" th:classappend="${pageId == 'components'} ? 'active' : ''"><i class="bi bi-puzzle"></i><span th:text="#{nav.components}">Components usage</span></a>
+            <a class="nav-link" th:href="@{/admin/signup}" th:classappend="${pageId == 'signup'} ? 'active' : ''"><i class="bi bi-person-plus"></i><span th:text="#{nav.signup}">Signup</span></a>
+            <a class="nav-link" th:href="@{/admin/signin}" th:classappend="${pageId == 'signin'} ? 'active' : ''"><i class="bi bi-box-arrow-in-right"></i><span th:text="#{nav.signin}">Sign in</span></a>
+            <a class="nav-link" th:href="@{/admin/forgot-password}" th:classappend="${pageId == 'forgotPassword'} ? 'active' : ''"><i class="bi bi-key"></i><span th:text="#{nav.forgotPassword}">Forgot password</span></a>
+            <div class="nav-group-label" th:text="#{nav.group.inventory}">Inventory</div>
+            <a class="nav-link" th:href="@{/admin/sku-stock}" th:classappend="${pageId == 'skuStock'} ? 'active' : ''"><i class="bi bi-box-seam"></i><span th:text="#{nav.skuStock}">SKU Stock</span></a>
+            <a class="nav-link" th:href="@{/admin/sold}" th:classappend="${pageId == 'sold'} ? 'active' : ''"><i class="bi bi-cart-check"></i><span th:text="#{nav.sold}">Sold</span></a>
+            <a class="nav-link" th:href="@{/}"><i class="bi bi-reply"></i><span>回首页</span></a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <div class="topbar animate-fade-in">
+            <h1 class="h5 mb-0" th:text="#{${pageTitle}}">Page</h1>
+            <div class="d-flex align-items-center gap-2">
+                <span class="text-muted small" th:text="#{nav.language}">Language</span>
+                <div class="dropdown">
+                    <!--
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" th:text="${#locale.language == 'zh'} ? '中文' : 'English'>English</button>
+                    -->
+                    <!-- th:with="path=${#request.requestURI != null and !#request.requestURI.isEmpty() ? #request.requestURI : '/'}" -->
+                    <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" th:text="${#locale.language == 'zh' ? '中文' : 'English'}">English</button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" th:href="@{${path}(lang='en')}">English</a></li>
+                        <li><a class="dropdown-item" th:href="@{${path}(lang='zh_CN')}">中文</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <th:block th:replace="${content}"/>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <th:block th:replace="~{fragments/scripts :: scripts}"/>
+</body>
+</html>

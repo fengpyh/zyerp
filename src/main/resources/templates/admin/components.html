@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<th:block th:fragment="content">
+    <p class="text-muted mb-4 animate-fade-in" th:text="#{page.components.description}">Sample UI components.</p>
+
+    <div class="row g-4">
+        <div class="col-12 animate-fade-in">
+            <div class="card">
+                <div class="card-header bg-transparent border-0 pt-3">
+                    <h6 class="mb-0" th:text="#{comp.buttons}">Buttons</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-primary" th:text="#{comp.primary}">Primary</button>
+                        <button type="button" class="btn btn-secondary" th:text="#{comp.secondary}">Secondary</button>
+                        <button type="button" class="btn btn-success" th:text="#{comp.success}">Success</button>
+                        <button type="button" class="btn btn-outline-primary" th:text="#{comp.primary}">Outline</button>
+                        <button type="button" class="btn btn-sm btn-primary">Small</button>
+                        <button type="button" class="btn btn-lg btn-primary">Large</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 animate-fade-in">
+            <div class="card">
+                <div class="card-header bg-transparent border-0 pt-3">
+                    <h6 class="mb-0" th:text="#{comp.forms}">Forms</h6>
+                </div>
+                <div class="card-body">
+                    <form class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" th:text="#{comp.label}">Label</label>
+                            <input type="text" class="form-control" th:placeholder="#{comp.placeholder}"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="name@example.com"/>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Textarea</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter text..."></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="c1"/>
+                                <label class="form-check-label" for="c1">Checkbox one</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="c2"/>
+                                <label class="form-check-label" for="c2">Checkbox two</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" th:text="#{comp.submit}">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 animate-fade-in">
+            <div class="card">
+                <div class="card-header bg-transparent border-0 pt-3">
+                    <h6 class="mb-0" th:text="#{comp.table}">Table</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th th:text="#{comp.label}">Label</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Item A</td><td>100</td></tr>
+                                <tr><td>2</td><td>Item B</td><td>200</td></tr>
+                                <tr><td>3</td><td>Item C</td><td>300</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 animate-fade-in">
+            <div class="card">
+                <div class="card-header bg-transparent border-0 pt-3">
+                    <h6 class="mb-0" th:text="#{comp.list}">List</h6>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">First item</li>
+                        <li class="list-group-item">Second item</li>
+                        <li class="list-group-item list-group-item-primary">Primary item</li>
+                        <li class="list-group-item">Fourth item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 animate-fade-in">
+            <div class="card">
+                <div class="card-header bg-transparent border-0 pt-3">
+                    <h6 class="mb-0" th:text="#{comp.selectionBox}">Selection box</h6>
+                </div>
+                <div class="card-body">
+                    <label class="form-label">Select</label>
+                    <select class="form-select">
+                        <option value="">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <label class="form-label mt-3">Dropdown (Bootstrap)</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                            Choose...
+                        </button>
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

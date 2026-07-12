@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<th:block th:fragment="content">
+    <div class="card animate-fade-in">
+        <div class="card-body">
+            <p class="text-muted" th:text="#{page.topics.description}">Manage forum topics</p>
+            <p class="mb-0 small text-muted">Placeholder for forum topic list.</p>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

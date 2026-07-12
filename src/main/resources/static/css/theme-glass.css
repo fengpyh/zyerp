@@ -1,0 +1,180 @@
+/**
+ * Theme: Bootswatch Quartz + Glassmorphism + White style
+ * Font: Google Fonts Outfit (applied via buding.css / head)
+ * Custom: glassmorphism cards, fade-in animations, white color style
+ */
+
+/* ========== Glassmorphism cards ========== */
+.card,
+.card-glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+.card-body {
+  background: transparent;
+}
+
+.card-header {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Main content panels (e.g. .bg-body sections) */
+.bg-body,
+.my-3.p-3.bg-body {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+/* White color style: light page background */
+body.bg-light {
+  background: linear-gradient(160deg, #f8f9fc 0%, #eef1f6 50%, #f0f2f7 100%) !important;
+  color: #1a1d23;
+}
+
+/* Link text: dark / black */
+a,
+a:link {
+  color: #1a1d23 !important;
+}
+
+a:hover {
+  color: #0d6efd !important;
+}
+
+a:visited {
+  color: #2d3139 !important;
+}
+
+.link-body-emphasis,
+a.link-body-emphasis {
+  color: #1a1d23 !important;
+}
+
+.link-body-emphasis:hover {
+  color: #0d6efd !important;
+}
+
+/* Navbar glassmorphism (Quartz-style) */
+.navbar.navbar-dark {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.navbar.navbar-dark .navbar-nav .nav-link {
+  color: #1a1d23 !important;
+}
+
+.navbar.navbar-dark .navbar-nav .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+/* Dropdowns */
+.dropdown-menu {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Fade-in animations ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.fade-in-slow {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Stagger children (use on parent) */
+.fade-in-stagger > * {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.fade-in-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.fade-in-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.fade-in-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.fade-in-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.fade-in-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.fade-in-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.fade-in-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.fade-in-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+.fade-in-stagger > *:nth-child(9) { animation-delay: 0.45s; }
+.fade-in-stagger > *:nth-child(10) { animation-delay: 0.5s; }
+
+/* Apply fade-in to main content on load */
+main {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Cards fade in when used in lists */
+.row-cols-1 .card,
+.row-cols-2 .card,
+.row-cols-3 .card,
+.row-cols-4 .card {
+  animation: fadeIn 0.5s ease-out backwards;
+}
+
+.row-cols-1 .card:nth-child(1), .row-cols-2 .card:nth-child(1), .row-cols-3 .card:nth-child(1), .row-cols-4 .card:nth-child(1) { animation-delay: 0.05s; }
+.row-cols-1 .card:nth-child(2), .row-cols-2 .card:nth-child(2), .row-cols-3 .card:nth-child(2), .row-cols-4 .card:nth-child(2) { animation-delay: 0.1s; }
+.row-cols-1 .card:nth-child(3), .row-cols-2 .card:nth-child(3), .row-cols-3 .card:nth-child(3), .row-cols-4 .card:nth-child(3) { animation-delay: 0.15s; }
+.row-cols-1 .card:nth-child(4), .row-cols-2 .card:nth-child(4), .row-cols-3 .card:nth-child(4), .row-cols-4 .card:nth-child(4) { animation-delay: 0.2s; }
+.row-cols-1 .card:nth-child(5), .row-cols-2 .card:nth-child(5), .row-cols-3 .card:nth-child(5), .row-cols-4 .card:nth-child(5) { animation-delay: 0.25s; }
+.row-cols-1 .card:nth-child(6), .row-cols-2 .card:nth-child(6), .row-cols-3 .card:nth-child(6), .row-cols-4 .card:nth-child(6) { animation-delay: 0.3s; }
+
+/* ========== White style overrides ========== */
+.text-muted {
+  color: #5c6370 !important;
+}
+
+.border-bottom {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.table {
+  --bs-table-bg: transparent;
+}
+
+.rounded {
+  border-radius: 12px !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Footer / offcanvas sidebar if needed */
+.offcanvas-collapse {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(14px);
+}
+
+@media (max-width: 991.98px) {
+  .offcanvas-collapse {
+    background: rgba(248, 249, 252, 0.97) !important;
+  }
+}

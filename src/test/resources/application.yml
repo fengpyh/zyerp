@@ -1,0 +1,70 @@
+project:
+  name: app-dev #gcloud projet name
+  debug: 1
+  entrust_interval: 5
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: trading
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: wangxu
+    tomcat:
+      initial-size: 3
+      max-active: 15
+      max-wait: 28800
+      test-on-borrow: true
+      test-on-return: true
+      test-while-idle: true
+      validation-query: SELECT 1
+    url: jdbc:mysql://127.0.0.1:3306/beta?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=GMT
+    username: root
+  jackson:
+    default-property-inclusion: non_null
+
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        # implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+
+      #            implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto: validate
+      # temp:
+      #   use_jdbc_metadata_defaults: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: false
+
+
+  #data:
+    #elasticsearch:
+      #cluster-name: my-application
+      #cluster-nodes: 10.10.0.163:9300
+
+redis:
+  hostName: 127.0.0.1
+  port: 6379
+
+grpc:
+  client:
+    grpc-wallet-server:
+      host: 127.0.0.1
+      port: 19898
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+  timeout: 10
+  server:
+    address: 0.0.0.0
+    port: 19898
+
+
+#数据库查询开关，true：查询走mysql；false：查询走es
+databaseSwitch: true

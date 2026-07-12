@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>数据中心</title>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link th:href="@{/css/offcanvas.css}" rel="stylesheet">
+    <link th:href="@{/css/buding.css}" rel="stylesheet">
+    <link th:href="@{/css/theme-glass.css}" rel="stylesheet">
+</head>
+  
+<body class="bg-light">
+    
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation" th:fragment="mynavbar">
+  <div class="container" id="mynavbar_child_container">
+    <div class="navbar-collapse offcanvas-collapse pt-2 pb-2" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0  ps-0"  style="min-width:1861px;min-height:25px;">
+        <li class="nav-item ps-0"><a class="nav-link  ps-0" aria-current="page" th:href="@{/}">首页</a></li>
+        <li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/mall}">二手商城</a></li>
+		<li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/products}">产品浏览</a></li>
+		<li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/dashboard}">数据终端</a></li>
+        <li class="nav-item dropdown" id="perf">
+          <a class="nav-link dropdown-toggle" href="#"  id="dropdown_perf" data-bs-toggle="dropdown" aria-expanded="false">技术文章</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown_perf">
+            <li><a class="dropdown-item" th:href="@{/blog/19}">软件项目</a></li>
+            <li><a class="dropdown-item" th:href="@{/blog/20}">职业生涯</a></li>
+            <li><a class="dropdown-item" th:href="@{/blog/16}">数学</a></li>
+            <li><a class="dropdown-item" th:href="@{/blog/22}">维修经验</a></li>
+            <li><a class="dropdown-item" th:href="@{/blog}">最新文章</a></li>
+          </ul>
+        </li>
+
+		<li class="nav-item" id="li_signup" th:if="${!LG}"><a class="nav-link" aria-current="page" th:href="@{/signin}">登录</a></li>
+		<li class="nav-item" id="li_signin" th:if="${!LG}"><a class="nav-link" aria-current="page" th:href="@{/signup}">注册</a></li>
+        <li th:if="${LG}" class="nav-item dropdown" id="user_profile">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" th:text="${email}">我的账号</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown">
+            <li><a class="dropdown-item" th:href="@{/}">我的账户</a></li>
+            <li><a class="dropdown-item" th:href="@{/profile}">我的主页</a></li>
+            <li><a class="dropdown-item" th:href="@{/config}">后台配置</a></li>
+            <li><a class="dropdown-item" onclick="do_logout();">注销</a></li>
+          </ul>
+       </li>
+      </ul>  
+    </div>
+  </div>
+</nav>
+
+
+<div class="container my-3">
+
+<main>
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">快讯</h6>
+    
+    <div class="d-flex text-muted pt-3">
+	    <div class="row row-cols-lg-2 row-cols-auto">
+	      <div class="col align-items-start">
+			<table class="table table-hover">
+			  <tbody>
+			    <tr th:each="t, status : ${hot_news}" th:if="${status.index < 12}">
+			      <!-- <th scope="row" th:text="${#dates.format(t.create_dt, 'yyyy-MM-dd HH:mm')}"></th>  -->
+			      <td class="new_td"><a class="fw-semibold link-body-emphasis" th:href="@{'/forum_thread?id=' + ${t.id} }"  th:text="${t.title.length() > 50 ? #strings.substring(t.title,0,50) + '...' : t.title }"></a></td>
+			    </tr>
+			    <tr><td class="new_td"><a class="fw-semibold link-body-emphasis" th:href="@{'/portlet?id=' + ${forum_id} }">查看更多...</a></td></tr>
+			  </tbody>
+			</table>
+	      </div>
+	      <!-- col1 end -->
+	      
+	      <div class="col align-items-start">
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner  ">
+    <div class="carousel-item active align-items-center justify-content-center">
+      <img th:src="@{/img/carousel_1.jpg}" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>显卡维修</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item align-items-center justify-content-center">
+      <img th:src="@{/img/carousel_2.png}"  class="d-block  w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>设备一应俱全</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item align-items-center justify-content-center">
+      <img  th:src="@{/img/carousel_5.jpg}" class="d-block  w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>芯片级维修</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+	      </div>
+		  <!-- col 2 end -->
+
+	    </div>
+    </div>
+  </div>
+  <!-- 快讯 END -->
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    	<h6 class="border-bottom pb-2 mb-0">开箱测评</h6>
+        <div class="text-muted pt-3">
+		 <div class="row">
+		     <div class="col-md-3 mb-3 pb-3 mb-sm-0"  th:each="t, status : ${opentest_list}" th:if="${status.index<8}">
+                <div class="card">
+                    <div class="card-body">
+                        <img th:src="@{'/api/image/get/' + ${t.tag2}+ '/1'}" class="card-img-top p-0" alt="Product Image">
+                        <p class="card-text pt-3"><a th:href="@{'/forum_thread?id=' + ${t.id} }" class="fw-semibold link-body-emphasis" th:text="${t.title.length() > 50 ? #strings.substring(t.title,0,50) + '...' : t.title }"></a></p>
+                    </div>
+                </div>
+            </div>
+		 
+		</div>
+    </div>
+  </div>
+  <!-- OPEN TEST END -->
+
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm" id="milestones_div">
+    <h6 class="border-bottom pb-2 mb-0">最新讨论</h6>
+    <div class="d-flex text-muted pt-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+        <div class="col" th:each="t, status : ${latest_list}">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <img th:src="@{'/api/image/get/' + ${t.tag2}+ '/1'}" class="card-img-top p-0" alt="Product Image">
+              <p class="card-text pt-3"><a th:href="@{'/forum_thread?id=' + ${t.id} }" class="fw-semibold link-body-emphasis" th:text="${t.title.length() > 50 ? #strings.substring(t.title,0,50) + '...' : t.title }"></a></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+
+    
+    <div class="text-muted pt-4">
+      <div class="d-flex justify-content-center">
+  		<button type="button" class="btn btn-light border">查看更多</button>
+		</div>
+    </div>
+  </div>
+  <!-- 最新讨论 End -->
+
+  
+</main>
+
+  <footer class="pt-4 my-md-5 pt-md-5 border-top"  th:fragment="footer">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" th:src="@{/img/bootstrap-logo.svg}" alt="" width="24" height="19">
+        <small class="d-block mb-3 text-muted">&copy; 2025–2026</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3 col-md">
+        <h5>Logo</h5>
+        <img alt="LOGO" th:src="@{/api/image/get/267/0}" class="img-fluid w-100">
+      </div>  
+      <div class="col-3 col-md">
+        <h5>网址</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary" href="https://www.emoe.xyz/" target="_blank">E萌工作室</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.chiphell.com/" target="_blank">Chiphell - 分享与交流用户体验   </a></li>
+          <li class="mb-1"><a class="link-secondary" href="http://www.lotpc.com/" target="_blank">装机之家、DIY硬件、笔记本、IT科技、数码、外设等！公众号: 装机之家科技</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.pconline.com.cn/" target="_blank">太平洋科技Online</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.zol.com.cn/" target="_blank">中关村在线</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.techpowerup.com/" target="_blank">TechPowerUp</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://zh.ifixit.com/" target="_blank">IFIXIT.com</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.expreview.com/" target="_blank">expreview.com 超能网</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.mydrivers.com/" target="_blank">mydrivers.com 快科技网</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.badcaps.net/homepage-community" target="_blank">badcaps 国外维修图纸网站</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.abscomputer.com.au/" target="_blank">Absolute Solution电脑维修网</a></li>
+         
+        </ul>
+      </div>
+      <div class="col-3 col-md">
+        <h5>技术资源</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary" href="https://github.com/yourkevin/NiterForum" target="_blank">NiterForum 尼特社区</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://getbootstrap.com/" target="_blank">Bootstrap 5</a></li>
+          <li class="mb-1"><a class="link-secondary" href="http://www.thymeleaf.org" target="_blank">Thymeleaf 模板开发</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://www.wangeditor.com/v4/" target="_blank">WangEditor v4</a></li>
+          
+          <li class="mb-1"><a class="link-secondary" href="https://layui.dev/" target="_blank">Layui 国产、原生态、开源极简模块化 Web UI 组件库</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://start.spring.io/" target="_blank">Spring.initializr</a></li>
+          <li class="mb-1"><a class="link-secondary" href="https://yapi.pro/" target="_blank">Yapi 高效、易用、功能强大的API管理平台</a></li>
+          <li class="mb-1"><a class="link-body-emphasis" href="https://gemini.google.com/" target="_blank">Gemini</a></li>
+          <li class="mb-1"><a class="link-body-emphasis" href="https://chatgpt.com/" target="_blank">chatgpt.com</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-3 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li class="mb-1"><a class="link-secondary" th:href="@{/arch}">Architect</a></li>
+          <li class="mb-1"><a class="link-secondary" href="#">Team</a></li>
+          <li class="mb-1"><a class="link-secondary" href="#">Locations</a></li>
+          <li class="mb-1"><a class="link-secondary" href="#">Privacy</a></li>
+          <li class="mb-1"><a class="link-secondary" href="#">Terms</a></li>
+          <li class="mb-1"><a class="link-secondary" href="http://192.168.82.223:3000/" target="_blank">代码仓库 Gitea</a></li>
+          <li class="mb-1"><a class="link-secondary" th:href="@{/timeline}">关于我们</a></li>
+          <li class="mb-1"><a class="link-secondary" th:href="@{/timeline}">网站开发</a></li>
+          <li class="mb-1"><a class="link-secondary" th:href="@{/mcu}">单片机开发</a></li>
+          
+            <li class="mb-1"><a class="link-body-emphasis" href="http://localhost:9096/" target="_blank">交易行情系统</a></li>
+            <li class="mb-1"><a class="link-secondary"  th:href="@{/imgfile}" target="_blank">云文件管理系统</a></li>
+            <li class="mb-1"><a class="link-secondary"  th:href="@{/course}" target="_blank">在线视频课堂系统</a></li>
+            <li class="mb-1"><a class="link-body-emphasis" href="http://localhost:9090/niterforum" target="_blank" th:text="#{nav_community}">社区论坛系统</a></li>
+
+        </ul>
+      </div>
+      <!-- div class="col-12 d-flex justify-content-end" -->
+    </div>
+    
+    <!-- row-gap-2 确保在手机端被迫折行时，上下行之间有间距 -->
+    <div class="d-flex flex-wrap justify-content-center align-items-center row-gap-2 pt-3">
+      <span>&copy; 2026 YourCompany 版权所有</span>
+      <!-- 桌面端显示一个竖线分隔符，移动端自动隐藏 -->
+      <span class="mx-3 d-none d-md-inline text-secondary">|</span> 
+      <a href="https://beian.miit.gov.cn/" target="_blank" class="text-white-50 text-decoration-none">
+        京ICP备12345678号-1
+      </a>
+    </div>
+  </footer>
+  
+
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+   			/*<![CDATA[*/
+   				var contextPath = /*[[@{/}]]*/ '';
+   			/*]]>*/
+	</script>
+
+
+  </body>
+</html>

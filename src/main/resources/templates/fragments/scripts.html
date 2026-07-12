@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body><th:block th:fragment="scripts">
+<script>
+$(document).ready(function() {
+
+    // 1. 模拟底层总线实时解耦数据集
+    const dashboardMetrics = [
+        { title: "全网并发吞吐量", value: "4,821 Mbps", trend: "↑ 12.4%", icon: "bi-activity", color: "text-primary", desc: "主干 HLS 管道及 WebRTC 连接流" },
+        { title: "活跃加密会话数", value: "1,240 Nodes", trend: "正常稳定", icon: "bi-shield-check", color: "text-success", desc: "基于 AES-128 动态密钥鉴权会话" },
+        { title: "异步切片任务池", value: "3 进时", trend: "队列清洗中", icon: "bi-cpu-fill", color: "text-warning", desc: "FFmpeg 分布式切片转换管道" },
+        { title: "数字软著与成品资产", value: "4 副本", trend: "持仓安全", icon: "bi-patch-check-fill", color: "text-info", desc: "Edu-Stream Suite 知识产权锁" }
+    ];
+
+    // 2. 核心渲染函数：组装右下角高清晰度工业图标看板
+    function initDashboardView() {
+        let cardsHtml = '';
+        
+        $.each(dashboardMetrics, function(index, item) {
+            cardsHtml += `
+                <div class="col-xl-3 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-3 p-4 bg-white h-100">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <small class="text-muted text-uppercase tracking-wider font-mono fs-8 d-block mb-1">${item.title}</small>
+                                <h3 class="fw-bold text-dark font-mono mb-0">${item.value}</h3>
+                            </div>
+                            <div class="p-2.5 rounded-3 bg-light ${item.color}">
+                                <i class="bi ${item.icon} fs-4"></i>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-top d-flex justify-content-between align-items-center font-mono fs-8">
+                            <span class="text-secondary text-truncate me-1">${item.desc}</span>
+                            <span class="fw-bold ${index === 2 ? 'text-warning' : 'text-success'} flex-shrink-0">${item.trend}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 拼接基础底层监控工作区底座
+        let fullContainerHtml = `
+            <div class="row g-4 mb-4">
+                ${cardsHtml}
+            </div>
+            <div class="card border-0 shadow-sm rounded-3 p-4 bg-white">
+                <div class="d-flex align-items-center gap-2 mb-3 border-bottom pb-2">
+                    <i class="bi bi-terminal text-dark fs-5"></i>
+                    <strong class="text-dark fs-7 font-mono">CORE_SYSTEM_LOGS / 实时审计事件流水</strong>
+                </div>
+                <div class="bg-dark rounded-3 p-3 text-light font-mono fs-8 lh-lg shadow-inner" style="max-height: 180px; overflow-y: auto;">
+                    <div class="text-muted">[2026-07-12 14:22:01] <span class="text-success">[INFO]</span> Redis 鉴权高速缓存预热成功，清洗 0 个僵尸 Token。</div>
+                    <div class="text-muted">[2026-07-12 14:25:32] <span class="text-info">[SYS]</span> HLS 混淆密钥管理网关收到来自 UID_1002 的防盗链握手断言。</div>
+                    <div class="text-muted">[2026-07-12 14:31:10] <span class="text-warning">[WARN]</span> 分布式分发 CDN 节点 cdn-accelerate 出现微幅延时波动 (210ms)，已触发就地降级。</div>
+                </div>
+            </div>
+        `;
+        
+        $('#dashboard-main-content').html(fullContainerHtml);
+    }
+
+    // 3. 拦截右上角全局检索表单提交事件
+    $('#top-search-form').on('submit', function(e) {
+        e.preventDefault();
+        const keyword = $(this).find('input').val().trim();
+        if (keyword.length > 0) {
+            alert(`正在向后端核心总线发起检索断言，关键字：【${keyword}】`);
+        }
+    });
+
+    // 4. 绑定消息、任务按钮、以及下拉菜单事件（统一截断拦截）
+    $(document).on('click', '#btn-nav-msg, #btn-nav-task, #btn-user-profile, #btn-system-logs', function(e) {
+        e.preventDefault();
+        const targetId = $(this).attr('id');
+        alert(`已成功捕捉并拦截【${targetId}】的动作流，正在唤醒对应的管理模态窗...`);
+    });
+
+    // 5. 安全登出动作
+    $('#btn-user-logout').on('click', function(e) {
+        e.preventDefault();
+        if (confirm("确认清理当前浏览器会话中的 JWT 鉴权 Token 并安全退出管理系统吗？")) {
+            alert("会话已成功销毁，即将重定向至系统登录验证中心。");
+        }
+    });
+
+    // 首次进入系统自动激活渲染
+    initDashboardView();
+});
+</script>
+</th:block></body>
+</html>

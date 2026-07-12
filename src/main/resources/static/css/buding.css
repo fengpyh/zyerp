@@ -1,0 +1,20 @@
+body {
+  font-family: "Outfit", "Source Han Sans", "Source Han Serif", Arial, sans-serif;
+  font-size: 16px; /* Recommended size for body text */
+}
+
+.fw-semibold {
+    font-weight: 400 !important;
+}
+
+.link-body-emphasis {
+    color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-opacity, 1)) !important;
+    -webkit-text-decoration-color: RGBA(var(--bs-emphasis-color-rgb),var(--bs-link-underline-opacity,1))!important;
+    text-decoration-color: RGBA(var(--bs-emphasis-color-rgb), var(--bs-link-underline-opacity, 1)) !important;
+     text-decoration:none;
+}
+
+.link-body-emphasis:hover {
+	
+	text-decoration: underline;
+}

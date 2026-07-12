@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<th:block th:fragment="content">
+    <div class="card animate-fade-in">
+        <div class="card-body">
+            <p class="text-muted" th:text="#{page.sold.description}">View and manage sold items.</p>
+            <p class="mb-0 small text-muted">Placeholder for sold items list.</p>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

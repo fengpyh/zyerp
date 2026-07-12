@@ -1,0 +1,18 @@
+<configuration scan="false" scanPeriod="60000" debug="false">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--  <pattern>[%d{yyyyMMdd HHmmss.SSS}]-[%thread %logger{30}]-[%msg]%n</pattern> -->
+            <pattern>[%d{yyyyMMdd HHmmss.SSS}]-[%thread %logger{30}-%line]-[%msg]%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.easeft" level="INFO" additivity="true"/>
+    <logger name="com.google" level="INFO" additivity="true"/>
+    <logger name="org.springframework" level="ERROR" additivity="true"/>
+    <logger name="org.hibernate" level="ERROR" additivity="true"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

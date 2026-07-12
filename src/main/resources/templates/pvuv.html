@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<th:block th:fragment="content">
+    <div class="card animate-fade-in">
+        <div class="card-body">
+            <p class="text-muted" th:text="#{page.pvuv.description}">Traffic analytics</p>
+            <div id="pvuvChart" style="height: 360px;"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var chart = echarts.init(document.getElementById('pvuvChart'));
+            var option = {
+                tooltip: { trigger: 'axis' },
+                legend: { data: ['PV', 'UV'], bottom: 0 },
+                grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+                xAxis: { type: 'category', boundaryGap: false, data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+                yAxis: { type: 'value' },
+                series: [
+                    { name: 'PV', type: 'line', smooth: true, data: [1200, 1320, 1100, 1340, 1890, 2330, 2100] },
+                    { name: 'UV', type: 'line', smooth: true, data: [220, 382, 191, 234, 390, 530, 410] }
+                ]
+            };
+            chart.setOption(option);
+            window.addEventListener('resize', function() { chart.resize(); });
+        });
+    </script>
+</th:block>
+</body>
+</html>

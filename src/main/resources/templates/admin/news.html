@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::content})}">
+<body>
+<th:block th:fragment="content">
+    <div class="card animate-fade-in">
+        <div class="card-body">
+            <p class="text-muted mb-4" th:text="#{page.news.description}">Manage news links</p>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th th:text="#{page.news.id}">ID</th>
+                            <th th:text="#{page.news.title_col}">Title</th>
+                            <th th:text="#{page.news.link}">Link</th>
+                            <th th:text="#{page.news.createdAt}">Created At</th>
+                            <th th:text="#{page.news.actions}">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item, stat : ${newsList}" class="animate-fade-in">
+                            <td th:text="${item.id}">1</td>
+                            <td th:text="${item.title}">Title</td>
+                            <td>
+                                <a th:href="${item.link}" th:text="${item.link}" target="_blank" rel="noopener" class="text-primary text-truncate d-inline-block" style="max-width: 280px;">Link</a>
+                            </td>
+                            <td th:text="${item.createdAt != null} ? ${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')} : '-'">-</td>
+                            <td>
+                                <span class="text-muted small" th:text="#{common.actions}">Actions</span>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(newsList)}">
+                            <td colspan="5" class="text-center text-muted py-4" th:text="#{page.news.noData}">No news yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>
