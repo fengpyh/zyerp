@@ -2,7 +2,7 @@ package com.cryptomind.wquote;
 
 import com.cryptomind.entity.CmSymbol;
 import com.cryptomind.service.SymbolService;
-import com.cryptomind.trading.utils.ExceptionUtil;
+import com.fastfintech.sdk.util.ExceptionUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

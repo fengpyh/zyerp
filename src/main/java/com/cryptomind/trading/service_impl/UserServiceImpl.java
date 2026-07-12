@@ -12,10 +12,10 @@ import com.cryptomind.entity.UserBase;
 import com.cryptomind.trading.api_request.LoginParam;
 import com.cryptomind.trading.api_request.UserLoginResponse;
 import com.cryptomind.trading.service.UserService;
-import com.cryptomind.trading.utils.ExceptionUtil;
-import com.cryptomind.trading.utils.SaltUtil;
-import com.cryptomind.trading.utils.TokenUtil;
-import com.cryptomind.trading.utils.UserPasswordUtil;
+import com.fastfintech.sdk.util.ExceptionUtil;
+import com.fastfintech.sdk.util_auth.SaltUtil;
+import com.fastfintech.sdk.util_auth.TokenUtil;
+import com.fastfintech.sdk.util_auth.UserPasswordUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

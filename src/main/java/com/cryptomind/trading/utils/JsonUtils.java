@@ -3,6 +3,7 @@ package com.cryptomind.trading.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fastfintech.sdk.util.ExceptionUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 

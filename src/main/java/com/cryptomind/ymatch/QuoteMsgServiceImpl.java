@@ -11,8 +11,8 @@ import org.springframework.util.CollectionUtils;
 import com.cryptomind.dto.TradeDetail;
 import com.cryptomind.entity.CmSymbol;
 import com.cryptomind.service.SymbolService;
-import com.cryptomind.trading.utils.ExceptionUtil;
 import com.cryptomind.trading.utils.JsonUtil;
+import com.fastfintech.sdk.util.ExceptionUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

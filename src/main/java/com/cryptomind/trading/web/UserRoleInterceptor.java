@@ -5,8 +5,8 @@ import com.cryptomind.dto.UserDto;
 import com.cryptomind.trading.dto.Consts;
 import com.cryptomind.trading.dto.Id_Role;
 import com.cryptomind.trading.service.UserService;
-import com.cryptomind.trading.utils.ExceptionUtil;
-import com.cryptomind.trading.utils.TokenUtil;
+import com.fastfintech.sdk.util.ExceptionUtil;
+import com.fastfintech.sdk.util_auth.TokenUtil;
 import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;

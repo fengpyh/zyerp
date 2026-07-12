@@ -37,6 +37,13 @@
     </pluginRepositories>
 
     <dependencies>
+    
+    	<dependency>
+        	<groupId>com.fastfintech</groupId>
+        	<artifactId>commonsdk</artifactId>
+        	<version>1.0-SNAPSHOT</version>
+        </dependency>
+        
         <!-- Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
