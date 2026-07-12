@@ -25,14 +25,14 @@ import lombok.extern.slf4j.Slf4j;
 public class UserRoleInterceptor extends HandlerInterceptorAdapter {
 
 
-	@Value("${project.secure.rsaPublicKey}")
-	private String rsaPublicKey;
+	//@Value("${project.secure.rsaPublicKey}")
+	//private String rsaPublicKey;
 	
-	@Value("${project.secure.rsaPrivateKey}")
-	private String rsaPrivateKey;
+	//@Value("${project.secure.rsaPrivateKey}")
+	//private String rsaPrivateKey;
 	
-	@Value("${project.secure.aesPrivateKey}")
-	private String aesKey;
+	//@Value("${project.secure.aesPrivateKey}")
+	//private String aesKey;
 
 	@Resource
 	private UserService userService;
@@ -41,7 +41,7 @@ public class UserRoleInterceptor extends HandlerInterceptorAdapter {
 		
 	@PostConstruct
 	private void initPostConstruct() {
-		authFunc = new AuthSsoInterceptorFunc(rsaPublicKey, rsaPrivateKey, aesKey);
+		authFunc = new AuthSsoInterceptorFunc();//rsaPublicKey, rsaPrivateKey, aesKey);
 	}
 
 	@Override
